@@ -1,0 +1,84 @@
+<h2 class="title">Sales by Category</h2>
+
+<div class="inputDate">
+    <label>Sales from: </label> <input type="date" ng-model="requestData.startDate" required>
+    <label>to: </label> <input type="date" ng-model="requestData.endDate" required>
+</div>
+<div ng-show="showButtonShow">
+    <button class="newButton pull-right" ng-click="getSalesByCategory(); showCategory(salesByCategoryData.sales)">SHOW SALES BY CATEGORY
+    </button>
+</div>
+
+<div ng-show="showCategory">
+    <div class="pull-right" id="chart_div"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Sales by category</h3>
+                    <label class="pull-right">TOTAL: {{salesByCategoryData.grandTotal}} &euro;</label>
+                </div>
+                <table id="datatable" class="table table-striped" cellspacing="0" width="100%">
+                    <thead style="text-align: center">
+                    <tr>
+                        <th><i class="fa fa-cog" aria-hidden="true"></i></th>
+                        <th>Category</th>
+                        <th>Turnover</th>
+                        <th>Percentage</th>
+                        <th>View</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in salesByCategoryData.sales">
+                        <td>{{$index + 1}}</td>
+                        <td>{{item.categoryName}}</td>
+                        <td>{{item.categoryTotal}} &euro;</td>
+                        <td>{{item.categoryPercent | number:2}} %</td>
+                        <td>
+                            <p data-placement="top" data-toggle="tooltip" title="Details">
+                                <button class="btn btn-primary btn-xs" data-title="Details" data-toggle="modal"
+                                        data-target="#edit" ng-click="getSalesByProduct(item)"><i class="fa fa-eye"
+                                                                                                  aria-hidden="true"></i>
+                                </button>
+                            </p>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div ng-show="showTableProduct" class="modalShow">
+    <button class="newButton pull-right" ng-click="getSalesByCategory()">BACK
+    </button>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Products in {{currentCategoryName}} category</h3>
+                    <label class="pull-right">TOTAL: {{salesByProductData.categoryTotal}}</label>
+                </div>
+                <table id="datable" class="table table-striped" cellspacing="0" width="100%">
+                    <thead style="text-align: center">
+                    <th>Product name</th>
+                    <th>Product total</th>
+                    <th>Product percent</th>
+                    <th>Total percent</th>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="product in salesByProductData.productSales">
+                        <td>{{product.productName}}</td>
+                        <td>{{product.productTotal}}</td>
+                        <td>{{product.productPercent}}</td>
+                        <td>{{product.totalPercent}}</td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

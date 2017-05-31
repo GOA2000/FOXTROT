@@ -1,0 +1,213 @@
+<head>
+    <style>
+        hr {
+            display: block;
+            margin-top: 0.01em;
+            margin-bottom: 0.01em;
+            margin-left: auto;
+            margin-right: auto;
+            border-style: inset;
+            border-width: 1px;
+            background-color: #F0D4D7;
+        }
+
+        #datatableInv {
+            background-color: #F0D4D7;
+        }
+
+        #datatableInv th,
+        td {
+            text-align: center;
+        }
+
+        #datatableInv td {
+            padding-top: 10px;
+        }
+
+        #Inv {
+            background-color: #F0D4D7;
+            border-collapse: separate;
+            border-spacing: 5px 5px;
+        }
+
+        #Inv th,
+        td {
+            vertical-align: text-top;
+            padding-left: 10px;
+        }
+
+        #Inv td {
+            padding-top: 10px;
+        }
+
+        #Inv2 {
+            background-color: #F0D4D7;
+            border-collapse: separate;
+            border-spacing: 5px 5px;
+        }
+
+        #Inv2 th,
+        td {
+            vertical-align: text-top;
+            padding-left: 10px;
+        }
+
+        #Inv2 td {
+            padding-top: 10px;
+        }
+
+
+    </style>
+</head>
+
+
+<h2 class="title">Invoice review</h2>
+
+<div class="inputDate">
+    <label>Invoices from: </label> <input type="date" ng-model="requestData.startDate" required>
+    <label>to: </label> <input type="date" ng-model="requestData.endDate" required>
+    <label style="font-size: 13px; font-style: italic; margin-top: 40px;  height: 40px;"> Customer:  </label><input
+        class="number" ng-model="requestData.Id" required style="margin-top: 32px; height: 40px;">
+</div>
+<button class="newButton pull-right" style="margin-top: 20px;  height: 40px;" ng-click="getInvoiceReview()">INVOICE REVIEW</button>
+<!--<table width="90%" height="60px">
+    <tr>
+        <td>
+            <div class="inputDate">
+                <label>Invoices from: </label> <input type="date" ng-model="requestData.startDate" required>
+                <label>to: </label> <input type="date" ng-model="requestData.endDate" required>
+            </div>
+        </td>
+        <td><label style="font-size: 13px; font-style: italic; margin-top: 40px;  height: 40px;">Customer: </label><input class="number pull-right" ng-model="requestData.Id" required style="margin-top: 32px; height: 40px;">
+        </td>
+        <td> <button class="newButton pull-right" style="margin-top: 20px;  height: 40px;" ng-click="getInvoiceReview()">INVOICE REVIEW</button>
+        </td>
+
+    </tr>
+
+</table>-->
+
+
+<div ng-show="showInvoices">
+    <div class="pull-right" id="chart_div"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Invoice Review</h3>
+                    <label class="pull-right">customerId: {{invoiceReviewData.customerId}}</label>
+                </div>
+                <table id="datatable" class="table table-striped" cellspacing="0" width="100%">
+                    <thead style="text-align: center">
+                    <tr>
+                        <th><i class="fa fa-cog" aria-hidden="true"></i></th>
+                        <th>Invoice No.</th>
+                        <th>Date</th>
+                        <th>Shipping date</th>
+                        <th>Invoice total</th>
+                        <th>Invoice status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in invoiceReviewData.invoices">
+                        <td>{{$index + 1}}</td>
+                        <td>{{item.invoiceNo}}</td>
+                        <td>{{item.invoiceDate}}</td>
+                        <td>{{item.shippedOn}}</td>
+                        <td>{{item.invoiceTotal}} &euro;</td>
+                        <td>{{item.invoiceStatus}}</td>
+                        <td>
+                            <p data-placement="top" data-toggle="tooltip" title="Details">
+                                <button class="btn btn-primary btn-xs" data-title="Details" data-toggle="modal"
+                                        data-target="#edit" ng-click="getInvoiceReviewGet(item)"><i class="fa fa-eye"
+                                                                                                    aria-hidden="true"></i>
+                                </button>
+                            </p>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div ng-show="showInvoiceGet" class="modalShow">
+
+
+    <button class="newButton pull-right" ng-click="getInvoiceReview()">BACK</button>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading" style="height: 80px;">
+                    <h3 class="panel-title">Details for the invoice no.: {{invoiceReviewGetData.invoiceNo}}</h3>
+                    <label class="pull-right">Customer: {{invoiceReviewGetData.customerName}}</label>
+                </div>
+                <hr>
+                <div class="panel-heading-details">
+                    <table id=Inv2 cellspacing="0" width="100%">
+                        <col width=20%>
+                        <col width=30%>
+                        <col width=20%>
+                        <col width=30%>
+                        <tr>
+                            <td>Invoice date:</td>
+                            <td>{{invoiceReviewGetData.invoiceDate | date:'dd.MM.yyyy.'}}</td>
+                            <td>Status:</td>
+                            <td>{{invoiceReviewGetData.invoiceStatus}}</td>
+                        </tr>
+                        <tr>
+                            <td>Date shipped:</td>
+                            <td>{{invoiceReviewGetData.shippedOn | date:'dd.MM.yyyy.'}}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+                <hr>
+                <div class="panel-heading-details">
+                    <table id=Inv cellspacing="0" width="100%">
+                        <col width=20%>
+                        <col width=30%>
+                        <col width=20%>
+                        <col width=30%>
+
+                        <tr>
+                            <td>Subtotal:</td>
+                            <td>{{invoiceReviewGetData.subtotal}} &euro;</td>
+                            <td>VAT:</td>
+                            <td>{{invoiceReviewGetData.vatAmount}} &euro;</td>
+                        </tr>
+                        <tr>
+                            <td>Shipping:</td>
+                            <td>{{invoiceReviewGetData.shipping}} &euro;</td>
+                            <td>Total:</td>
+                            <td>{{invoiceReviewGetData.shipper}} &euro;</td>
+                        </tr>
+                    </table>
+                </div>
+                <hr>
+                <div>
+                    <table id="datatableInv" class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Subtotal</th>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="product in invoiceReviewGetData.products">
+                            <td>{{product.productName}}</td>
+                            <td>{{product.quantity | number:2}}</td>
+                            <td>{{product.price | number:2}} &euro;</td>
+                            <td>{{product.subtotal | number:2}} &euro;</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

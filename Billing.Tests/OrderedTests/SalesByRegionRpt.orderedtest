@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<OrderedTest name="SalesByRegionRpt" storage="c:\foxtrot\foxtrot\billing.tests\orderedtests\salesbyregionrpt.orderedtest" id="e0895ff4-37f5-4b5f-bb82-60f86d0e184c" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestLinks>
+    <TestLink id="a36da1c0-499c-672e-1c12-a3c317a969d7" name="SalesByRegionGoodDate" storage="..\bin\debug\billing.tests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="d8ce42a4-df49-0a1b-1871-65375a5f18c1" name="SalesByRegionContent" storage="..\bin\debug\billing.tests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  </TestLinks>
+</OrderedTest>

@@ -1,0 +1,53 @@
+<h2 class="title">Stock level</h2>
+
+
+<div class="inputDate">
+    <label>Stock from: </label> <input type="date" ng-model="requestData.startDate" required>
+    <label>to: </label> <input type="date" ng-model="requestData.endDate" required>
+    <div>
+        <label>Category: </label><select ng-model="requestData.Id" ng-options="category.id as category.name for category in categories" required style="margin-left: 15px; margin-top: 30px; height: 40px; width : 300px"></select>
+    </div>
+</div>
+
+
+
+
+<div>
+    <button class="newButton pull-right" style="margin-top: 20px" ng-click="getStockLevel()">STOCK LEVEL</button>
+</div>
+
+
+<div ng-show="showStockLevel">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Stock Level</h3>
+                    <label class="pull-right">Category: {{stockLevelData.categoryName}}</label>
+                </div>
+                <table id="datatable" class="table table-striped" style="font-size: 12px; text-align: left"  cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Unit</th>
+                            <th>Purchased</th>
+                            <th>Total Sold</th>
+                            <th>In Stock</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in stockLevelData.sales">
+                            <td>{{item.productName}}</td>
+                            <td>{{item.productUnit}}</td>
+                            <td>{{item.productInput}}</td>
+                            <td>{{item.productOutput}}</td>
+                            <td>{{item.stock}}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

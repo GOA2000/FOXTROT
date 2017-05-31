@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html ng-app="Billing">
+
+
+<head>
+    <meta charset="windows-1250">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/circle.css">
+    <link rel="stylesheet" href="styles/bootstrap.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" type="text/css" href="styles/sweetalert.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="library/sweetalert.min.js"></script>
+    <script src="library/angular.min.js"></script>
+    <script src="library/angular-route.min.js"></script>
+    <script src="library/angular-local-storage.min.js"></script>
+    <script src="library/angular-animate.min.js"></script>
+    <script src="library/ui-bootstrap-tpls.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/collapse.js"></script>
+    <script src="scripts/controllers/AgentsCtrl.js"></script>
+    <script src="scripts/controllers/CategoriesCtrl.js"></script>
+    <script src="scripts/controllers/CustomersCtrl.js"></script>
+    <script src="scripts/controllers/InvoicesCtrl.js"></script>
+    <script src="scripts/controllers/ItemsCtrl.js"></script>
+    <script src="scripts/controllers/SuppliersCtrl.js"></script>
+    <script src="scripts/controllers/ShippersCtrl.js"></script>
+    <script src="scripts/controllers/ProductsCtrl.js"></script>
+    <script src="scripts/controllers/ProcurementsCtrl.js"></script>
+    <script src="scripts/controllers/StockLevelCtrl.js"></script>
+    <script src="scripts/services/DataService.js"></script>
+    <script src="scripts/services/HelperService.js"></script>
+    <script src="scripts/controllers/LoginCtrl.js"></script>
+    <script src="scripts/services/LoginService.js"></script>
+    <script src="scripts/directives/AdminPriv.js"></script>
+    <script src="scripts/directives/ModalDirective.js"></script>
+    <script src="scripts/directives/PartnerDirective.js"></script>
+    <script src="scripts/directives/IsFromAgent.js"></script>
+    <script src="scripts/directives/PaginationDirective.js"></script>
+    <script src="scripts/directives/FilterDirective.js"></script>
+    <script src="scripts/controllers/CustomerSalesCtrl.js"></script>
+    <script src="scripts/controllers/CategorySalesCtrl.js"></script>
+    <script src="scripts/controllers/AgentRegionCtrl.js"></script>
+    <script src="scripts/controllers/SalesByRegionCtrl.js"></script>
+    <script src="scripts/controllers/InvoiceReportCtrl.js"></script>
+    <script src="scripts/controllers/customersCategoriesCtrl.js"></script>
+    <script src="scripts/controllers/DashboardCtrl.js"></script>
+    <script src="scripts/controllers/InvoiceReviewCtrl.js"></script>
+    <script src="library/chart.min.js"></script>
+    <script src="library/html2canvas.min.js"></script>
+
+    <link rel="stylesheet" href="styles/modal.css">
+
+    <script language="JavaScript" src="https://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript"></script>
+    <script language="JavaScript"
+            src="https://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/3/dataTables.bootstrap.js"
+            type="text/javascript"></script>
+
+
+</head>
+
+<body>
+<header>
+    <div class="container">
+
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!--For better display on the phone-->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+            </div>
+            <!--Top Menu Items-->
+            <ul class="nav navbar-right top-nav">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">{{currentUser}}<b class="fa fa-angle-down"></b></a>
+
+                    <ul class="dropdown-menu">
+                        <!-- include image-->
+                        <li><img ng-src="./images/{{userImgName}}.jpg" alt="Description" /></li>
+                        <li class="divider"></li>
+                        <li><a href="#/logout"><i class="fa fa-fw fa-power-off"></i> Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <span class="navbar-brand">
+                    <h2>Billing Application</h2>
+                </span>
+                <ul id="mySidenav" class="nav navbar-nav side-nav">
+                    <li><a href="#/dashboard"><i class="fa fa-fw fa-tachometer"></i> DASHBOARD</a> </li>
+                    <li><a href="#/agents"><i class="fa fa-fw fa-star"></i> AGENTS</a></li>
+                    <li><a href="#/customers"><i class="fa fa-fw fa-usd"></i> CUSTOMERS</a></li>
+                    <li><a href="#/shippers"><i class="fa fa-fw fa-truck"></i> SHIPPERS</a></li>
+                    <li><a href="#/suppliers"><i class="fa fa-fw fa-user-plus"></i> SUPPLIERS</a></li>
+                    <li>
+                        <a data-toggle="collapse" data-target="#submenu-1"><i class="fa fa-fw fa-flag"></i> REPORTS <i class="fa fa-fw fa-angle-down pull-right"></i></a>
+                        <ul id="submenu-1" class="collapse">
+                            <li><a href="#/salesbycustomer"><i class="fa fa-angle-double-right"></i> SALES BY CUSTOMER</a></li>
+                            <li><a href="#/salesbycategory"><i class="fa fa-angle-double-right"></i> SALES BY CATEGORY</a></li>
+                            <li><a href="#/agentregion"><i class="fa fa-angle-double-right"></i> AGENT BY REGION</a></li>
+                            <li><a href="#/salesbyregion"><i class="fa fa-angle-double-right"></i> SALES BY REGION</a></li>
+                            <li><a href="#/invoicereport"><i class="fa fa-angle-double-right"></i> INVOICE REPORT</a></li>
+                            <li><a href="#/invoicereview"><i class="fa fa-angle-double-right"></i> INVOICE REVIEW</a></li>
+                            <li><a href="#/customerscategories"><i class="fa fa-angle-double-right"></i> CUSTOMERS BY CATEGORIES</a></li>
+                            <li><a href="#/stocklevel"><i class="fa fa-angle-double-right"></i> STOCK LEVEL</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#/categories"><i class="fa fa-fw fa fa-question-circle"></i> CATEGORIES</a></li>
+                    <li><a href="#/products"><i class="fa fa-fw fa fa-product-hunt"></i> PRODUCTS</a></li>
+                    <li><a href="#/items"><i class="fa fa-fw fa fa-info"></i> ITEMS</a></li>
+                    <li><a href="#/invoices"><i class="fa fa-fw fa fa-file-text"></i> INVOICES</a></li>
+                    <li><a href="#/procurements"><i class="fa fa-fw fa fa-book"></i> PROCUREMENTS</a></li>
+                    
+ 
+                </ul>
+
+            </div>
+
+        </nav>
+    </div>
+
+</header>
+
+<div class="container">
+    <div ng-view autoscroll="true"></div>
+</div>
+
+</body>
+</html>

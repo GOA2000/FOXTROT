@@ -1,0 +1,129 @@
+<head>
+    <style>
+    hr {
+            display: block;
+            margin-top: 0.01em;
+            margin-bottom: 0.01em;
+            margin-left: auto;
+            margin-right: auto;
+            border-style: inset;
+            border-width: 1px;
+            background-color: #F0D4D7;
+        }
+        
+        datatableInv {
+            background-color: #F0D4D7;
+            border-collapse: separate;
+            border-spacing: 5px 5px;
+        }
+        
+        datatableInv th, td {
+            vertical-align: text-top;
+            padding-left: 10px;
+        }
+        
+        datatableInv td {
+            padding-top: 10px;
+        }
+
+    </style>
+</head>
+
+<table cellspacing="0" width="80%">
+    <tr>
+        <button class="newButton pull-right" style="margin-top: 80px" ng-click="getInvoiceReport()">INVOICE REPORT</button>
+        <input class="number pull-right" ng-model="requestData.id" required style="margin-top: 85px; height: 30px;" placeholder="Please enter Invoice No">
+    </tr>
+</table>
+
+<div class="pull-right" ng-show="showInvoices" style="width: 100%">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">REPORT FOR INVOICE</h3>
+                    <label class="pull-right">INVOICE NO: {{invoiceReportData.invoiceNo}}</label>
+                </div>
+                <div class="panel-heading-details">
+                    <table id=d atatableInv cellspacing="0" width="100%">
+                        <col width=20%>
+                        <col width=30%>
+                        <col width=20%>
+                        <col width=30%>
+                        <tr>
+                            <td>Invoice date:</td>
+                            <td>{{invoiceReportData.invoiceDate | date:'dd.MM.yyyy.'}}</td>
+                            <td>Order date:</td>
+                            <td>{{invoiceReportData.orderDate | date:'dd.MM.yyyy.'}}</td>
+                        </tr>
+                        <tr>
+                            <td>Customer:</td>
+                            <td>{{invoiceReportData.customerName}}</td>
+                            <td>Shipped date:</td>
+                            <td>{{invoiceReportData.shippedDate | date:'dd.MM.yyyy.'}}</td>
+                        </tr>
+                        <tr>
+                            <td>Address:</td>
+                            <td>{{invoiceReportData.customerAddress}}, {{invoiceReportData.zipCode}}, {{invoiceReportData.town}}</td>
+                            <td>Shipped via:</td>
+                            <td>{{invoiceReportData.shippedVia}}</td>
+                        </tr>
+                        <tr>
+                            <td>Sales person:</td>
+                            <td>{{invoiceReportData.salesperson}}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+                <hr>
+                <div class="panel-heading-details">
+                    <table id=datatableInv cellspacing="0" width="100%">
+                        <col width=20%>
+                        <col width=30%>
+                        <col width=20%>
+                        <col width=30%>
+
+                        <tr>
+                            <td>Subtotal:</td>
+                            <td>{{invoiceReportData.invoiceSubtotal}} &euro;</td>
+                            <td>VAT:</td>
+                            <td>{{invoiceReportData.vatAmount}} &euro;</td>
+                        </tr>
+                        <tr>
+                            <td>Shipping:</td>
+                            <td>{{invoiceReportData.shipping}} &euro;</td>
+                            <td>Total:</td>
+                            <td>{{invoiceReportData.invoiceTotal}} &euro;</td>
+                        </tr>
+                    </table>
+                </div>
+                <hr>
+                <div>
+                    <table id="datatable" class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th><i class="fa fa-cog" aria-hidden="true"></i></th>
+                                <th>Product</th>
+                                <th>Unit</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in invoiceReportData.products">
+                                <td>{{$index + 1}}</td>
+                                <td>{{item.productName}}</td>
+                                <td>{{item.productUnit}}</td>
+                                <td>{{item.quantity}}</td>
+                                <td>{{item.price}} &euro;</td>
+                                <td>{{item.subtotal}} &euro;</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

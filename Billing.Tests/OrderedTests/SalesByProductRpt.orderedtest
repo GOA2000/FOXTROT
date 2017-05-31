@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<OrderedTest name="SalesByProductRpt" storage="c:\foxtrot\foxtrot\billing.tests\orderedtests\salesbyproductrpt.orderedtest" id="6cd73e83-3001-43bb-af26-af07ac6cebd9" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestLinks>
+    <TestLink id="aafe7c9d-4652-3af5-7941-7590b8e66ef3" name="GetSalesByProduct" storage="..\bin\debug\billing.tests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="2367b28a-fdbf-f520-61a3-6213e9a3f05d" name="GetSalesByProductsWrongID" storage="..\bin\debug\billing.tests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="c3c721b3-bb2e-6fdf-dd1e-ef1c0ee987da" name="GetCountOfProducts" storage="..\bin\debug\billing.tests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  </TestLinks>
+</OrderedTest>

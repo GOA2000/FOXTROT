@@ -1,0 +1,42 @@
+<h2 class="title">Customers by Categories</h2>
+
+<div class="inputDate">
+    <label>Sales from: </label> <input type="date" ng-model="requestData.startDate" required>
+    <label>to: </label> <input type="date" ng-model="requestData.endDate" required>
+</div>
+<button class="newButton pull-right" ng-click="getCustomersByCategories()">SHOW CUSTOMERS BY CATEGORIES
+</button>
+
+<div ng-show="showCustomersCategories">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Customers by Categories</h3>
+                </div>
+                <table id="datatable" class="table table-striped" style="font-size: 12px;" cellspacing="0" width="100%">
+                    <thead style="text-align: center">
+                    <tr>
+                        <th>Customer</th>
+                        <th>Turnover</th>
+                        <th ng-repeat="item in customersByCategoriesData.catRevenue">{{item.categoryName}}</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in customersByCategoriesData.cusRevenue">
+                        <td><b>{{item.customerName}}</b></td>
+                        <td>{{item.customerTurnover}} &euro;</td>
+                        <td ng-repeat="i in customersByCategoriesData.catRevenue">{{item.categorySales[$index]}} &euro;</td>
+                    </tr>
+                    <tr>
+                        <td><b> Total:</b></td>
+                        <td>{{customersByCategoriesData.grandTotal}} &euro;</td>
+                        <td ng-repeat="item in customersByCategoriesData.catRevenue"> {{item.categoryTotal}} &euro;</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

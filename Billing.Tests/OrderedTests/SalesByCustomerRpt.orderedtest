@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<OrderedTest name="salesbycustomerrpt" storage="c:\foxtrot\foxtrot\billing.tests\orderedtests\salesbycustomerrpt.orderedtest" id="83bb140f-a231-4c13-9797-90e108c7fff9" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestLinks>
+    <TestLink id="0185d851-bb76-4adf-067b-3718b7276c7c" name="SalesByCustomerDate" storage="..\bin\debug\billing.tests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="958216a6-2de8-bf69-3c25-81a058ced6f9" name="SalesByCustomerContent" storage="..\bin\debug\billing.tests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="083fac1a-b2f8-17d1-ac41-fd9f8ade07df" name="SalesByCustomerContentModel" storage="..\bin\debug\billing.tests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  </TestLinks>
+</OrderedTest>

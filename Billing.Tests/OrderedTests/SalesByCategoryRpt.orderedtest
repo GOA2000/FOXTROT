@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<OrderedTest name="salesbycategoryrpt" storage="c:\foxtrot\foxtrot\billing.tests\orderedtests\salesbycategoryrpt.orderedtest" id="5710b13d-6e0d-4334-8e72-89d33aebc5e2" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestLinks>
+    <TestLink id="881bce1a-109e-f724-32ba-36d72df50145" name="GetSalesByCategory" storage="..\bin\debug\billing.tests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="d183a9a2-c553-073b-0d73-02d3a39cbc96" name="GetCountOfCategory" storage="..\bin\debug\billing.tests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="532304f4-46b0-d000-120f-76906cbc7143" name="GetGrandTotal" storage="..\bin\debug\billing.tests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  </TestLinks>
+</OrderedTest>

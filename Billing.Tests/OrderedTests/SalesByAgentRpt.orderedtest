@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<OrderedTest name="salesbyagentrpt" storage="c:\foxtrot\foxtrot\billing.tests\orderedtests\salesbyagentrpt.orderedtest" id="7d1f6583-56f1-4112-8be9-59e8a2ccdcf6" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestLinks>
+    <TestLink id="7345a481-a8ef-2998-da27-b9be484addba" name="SalesByAgentContent" storage="..\bin\debug\billing.tests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <TestLink id="5b9e01ba-2f88-56c6-ab68-62325575d8f6" name="SalesByAgentGoodDate" storage="..\bin\debug\billing.tests.dll" type="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestElement, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.ObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  </TestLinks>
+</OrderedTest>

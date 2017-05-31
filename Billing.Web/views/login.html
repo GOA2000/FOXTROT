@@ -1,0 +1,255 @@
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<style>
+    div.mainLog {
+        background: radial-gradient(ellipse at center, #606468 1%, #222 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0264d6', endColorstr='#1c2b5a', GradientType=1); /* IE6-9 fallback on horizontal gradient */
+        height: calc(100vh);
+        width: 100%;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0px auto;
+    }
+
+    :before,
+    :after {
+        box-sizing: border-box;
+    }
+
+    body {
+        color: #606468;
+        font: 87.5%/1.5em 'Open Sans', sans-serif;
+        margin: 0;
+    }
+
+    a {
+        color: #eee;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    input {
+        border: none;
+        font-family: 'Open Sans', Arial, sans-serif;
+        font-size: 14px;
+        padding: 0;
+    }
+
+    p {
+        line-height: 1.5em;
+    }
+
+    .clearfix {
+        *zoom: 1;
+    }
+
+    :before,
+    :after {
+        content: ' ';
+        display: table;
+    }
+
+    :after {
+        clear: both;
+    }
+
+    .container {
+        left: 50%;
+        position: fixed;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 120%
+    }
+
+    #login form {
+        width: 250px;
+    }
+
+    #login {
+        border-right: 1px solid #fff;
+        padding: 0px 22px;
+        width: 59%;
+    }
+
+    .logo h1 {
+        color: #fff;
+        font-size: 80px;
+        line-height: 125px;
+    }
+
+    .logo h4 {
+        color: #3A2344;
+        font-size: 30px;
+        line-height: 80px;
+        margin-left: 50%;
+    }
+
+    #login form span.fa {
+        background-color: #ccccb3;
+        border-radius: 3px 0px 0px 3px;
+        color: #000;
+        display: block;
+        float: left;
+        height: 50px;
+        font-size: 24px;
+        line-height: 50px;
+        text-align: center;
+        width: 50px;
+    }
+
+    #login form span.fa:before {
+        margin-left: 15px;
+    }
+
+    #login form input {
+        height: 50px;
+    }
+
+    fieldset {
+        padding: 0;
+        border: 0;
+        margin: 0;
+
+    }
+
+    #login form input[type="text"], input[type="password"] {
+        background-color: #ccccb3;
+        border-radius: 0px 3px 3px 0px;
+        color: #000;
+        margin-bottom: 1em;
+        padding: 0 16px;
+        width: 200px;
+    }
+
+    #login form button {
+        font-family: 'Open Sans', Arial, sans-serif;
+        font-size: 13px;
+        line-height: 1.5em;
+        overflow: hidden;
+        text-align: center;
+        border-radius: 3px;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        background-color: #3A2344;
+        color: #eee;
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: 0 20px;
+        height: 30px;
+        border: white;
+    }
+
+    #login form button:hover {
+        background-color: #ccccb3;
+    }
+
+    #login > p {
+        text-align: center;
+    }
+
+    #login > p span {
+        padding-left: 5px;
+    }
+
+    .middle {
+        display: flex;
+        width: 600px;
+    }
+
+    .navbar {
+        visibility: hidden;
+    }
+
+    label {
+        font-family: 'Open Sans', Arial, sans-serif;
+        font-size: 14px;
+        color: lightgrey;
+    }
+
+
+</style>
+
+<div class="mainLog">
+
+    <div class="container">
+        <div class="middle">
+           
+            <div id="login">
+
+                <form action="javascript:void(0);" method="get" class="form-group">
+
+                    <fieldset class="clearfix">
+
+                        <p><span class="fa fa-user"></span><input type="text" Placeholder="Username"
+                                                                  class="form-control"
+                                                                  ng-model="user.name" required></p>
+                        <p><span class="fa fa-lock"></span><input type="password" Placeholder="Password"
+                                                                  class="form-control"
+                                                                  ng-model="user.pass" required></p>
+                       
+                              
+                        <div>
+
+                            <div class="checkbox">
+                                <label><input type="checkbox" style="margin-top: -18px" ng-model="user.remember">
+                                    Remember me</label>
+                            </div>
+
+
+                            <span style="width:50%; text-align:right;  display: inline-block;"><button
+                                    ng-click="login()" class="loginButton btn btn-lg btn-primary btn-block btn-info">LOG IN</button></span>
+                        </div>
+
+                    </fieldset>
+                    <div class="clearfix"></div>
+                </form>
+
+                <div class="clearfix"></div>
+
+            </div>
+            <div class="logo"><h1>Billing</h1>
+                <h4>Foxtrot</h4>
+
+                <div class="clearfix"></div>
+            </div>
+
+        </div>
+
+    </div>
+    <div style="width:480px; margin: 12px auto;" ng-show="debug">
+        Login as:<br>
+        <button ng-click="loginAs('marlon')">Marlon</button>
+        <button ng-click="loginAs('julia')">Julia</button>
+        <button ng-click="loginAs('antonio')">Antonio</button>
+        <button ng-click="loginAs('meryl')">Meryl</button>
+        <button ng-click="loginAs('samantha')">Samantha</button>
+        <button ng-click="loginAs('john')">John</button>
+        <button ng-click="loginAs('paul')">Paul</button>
+        <button ng-click="loginAs('kevin')">Kevin</button>
+    </div>
+
+</div>
+
+
+<!--<div style="border:solid 1px blue; width:200px; margin:60px auto; padding:12px">
+<div>Username<br><input type="text" ng-model="user.name"></div>
+<div>Password<br><input type="password" ng-model="user.pass"></div>
+<div style="margin-top: 12px;"><input type='checkbox' ng-model="user.remember"> Remember me!</div>
+<div style="margin-top:40px"><button ng-click="login()">LOG IN</button></div>
+</div>
+
+<div style="width:480px; margin: 12px auto;" ng-show="debug">
+Login as:<br>
+<button ng-click="loginAs('marlon')">Marlon</button>
+<button ng-click="loginAs('julia')">Julia</button>
+<button ng-click="loginAs('antonio')">Antonio</button>
+<button ng-click="loginAs('meryl')">Meryl</button>
+<button ng-click="loginAs('samantha')">Samantha</button>
+<button ng-click="loginAs('john')">John</button>
+<button ng-click="loginAs('paul')">Paul</button>
+<button ng-click="loginAs('kevin')">Kevin</button>
+</div>-->

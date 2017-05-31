@@ -1,0 +1,155 @@
+<head>
+    <style>
+        
+        datatableAgent {
+            border-collapse: separate;
+            border-spacing: 5px 5px;
+            column-width: auto
+        }
+        
+        datatableAgent th, td {
+            vertical-align: text-top;
+            padding-left: 10px;
+        }
+        
+        datatableAgent td {
+            padding-top: 10px;
+        }
+    }
+
+    </style>
+</head>
+
+
+<h2 class="title">Sales by region</h2>
+
+<div class="inputDate">
+    <label>Sales from: </label> <input type="date" ng-model="requestData.startDate" required>
+    <label>to: </label> <input type="date" ng-model="requestData.endDate" required>
+</div>
+
+<div ng-show="showButtonShow">
+    <button class="newButton pull-right" ng-click="getSalesByRegion()">SHOW SALES BY REGION</button>
+</div>
+
+
+<div ng-show="showSales">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading" style="height: 100px;">
+                    <h3 class="panel-title">Sales by Region</h3>
+                    <table class="pull-right">
+                        <tr>
+                            <td>Start date:</td>
+                            <td>{{salesByRegionData.startDate | date:'dd.MM.yyyy.'}}</td>
+                        </tr>
+                        <tr>
+                            <td>End date:</td>
+                            <td>{{salesByRegionData.endDate | date:'dd.MM.yyyy.'}}</td>
+                        </tr>
+                        <tr>
+                            <td>Total sales:</td>
+                            <td>{{salesByRegionData.grandTotal | number:2}} &euro;</td>
+                        </tr>
+
+                    </table>
+                </div>
+                <div>
+
+                    <table width="100%" id="datatable" >
+                        <div>
+                            <tr style="font-weight: bold;">
+                                <td width="32%">Name</td>
+                                <td width="25%">Total</td>
+                                <td width="15%">Region percent</td>
+                                <td width="14%">Total percent</td>
+                                <td width="14%">Agent</td>
+                            </tr>
+                        </div>
+                        <tbody>
+                            <table id="datatable" class="table table-striped" ng-repeat="item in salesByRegionData.sales">
+                                <div>
+                                    <tr width="100%" style="background-color:#6680b2; font-weight: bold;">
+                                        <td>Region: {{item.regionName}}</td>
+                                        <td>Total: {{item.regionTotal | number:2}} &euro;</td>
+                                        <td>Percent: {{item.regionPercent | number:2}}%</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </div>
+                                <tbody>
+                                    <tr ng-repeat="agent in item.agents">
+                                        <td width="250px">{{agent.agentName}}</td>
+                                        <td width="200px">{{agent.agentTotal | number:2}} &euro;</td>
+                                        <td width="100px">{{agent.regionPercent | number:2}} %</td>
+                                        <td width="100px">{{agent.totalPercent | number:2}} %</td>
+                                        <td width="100px">
+                                            <p data-placement="top" data-toggle="tooltip" title="Details">
+                                                <button class="btn btn-primary btn-xs" data-title="Details" data-toggle="modal" data-target="#edit" ng-click="getSalesByAgent(agent)"><i class="fa fa-eye" aria-hidden="true"></i>                                                                                                  
+                                        </button>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tbody>
+                            </table>
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div ng-show="showAgentRegion" class="modalShow">
+
+
+    <button class="newButton pull-right" ng-click="getSalesByRegion()">BACK</button>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading" style="height: 120px;">
+                    <h3 class="panel-title">Sales in regions for {{salesByAgentData.agentName}}</h3>
+                   <table id="datatableAgent" class="pull-right"> <!--  class="pull-right"-->
+                        <tr>
+                            <td>Date from:</td>
+                            <td>{{requestData.startDate | date:'dd.MM.yyyy.'}}</td>
+                        </tr>
+                        <tr>
+                            <td>Date to:</td>
+                            <td>{{requestData.endDate | date:'dd.MM.yyyy.'}}</td>
+                        </tr>
+                        <tr>
+                            <td>Agent total: </td>
+                            <td>{{salesByAgentData.agentTotal | number:2}}  &euro;</td>
+                        </tr>
+                        <tr>
+                            <td>Agent total procent::</td>
+                            <td>{{salesByAgentData.procentTotal | number:2}} %</td>
+                        </tr>
+                    </table>
+
+
+                </div>
+                <table id="datatable" class="table table-striped" cellspacing="0" width="100%">
+                    <thead>
+                        <th>Region name</th>
+                        <th>Region total</th>
+                        <th>Region percent</th>
+                        <th>Total percent</th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="agent in salesByAgentData.sales">
+                            <td>{{agent.regionName}}</td>
+                            <td>{{agent.regionTotal | number:2}}  &euro;</td>
+                            <td>{{agent.regionPercent | number:2}} %</td>
+                            <td>{{agent.totalPercent | number:2}} %</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

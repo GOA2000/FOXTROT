@@ -1,0 +1,225 @@
+<style>
+    .container {
+        margin-right: 0;
+    }
+</style>
+<div style="margin-top: 7%; margin-left: 8%; ">
+    <div style="float: left;">
+        <img ng-src="./images/{{userImgName}}.jpg" alt="Description"
+             style="border: 1px groove black; border-radius: 6px;"/>
+    </div>
+    <div style="padding-top: 2%; margin-left: 14%;">
+        <h2 style="font-family: 'Open Sans'; font-weight: bold; color: #5e5e5e;">{{dashboardData.agent}}</h2>
+        <h3 style="font-family: 'Open Sans'; font-weight: bold; color: #5e5e5e; padding-bottom: 4%;">{{title}}</h3>
+    </div>
+</div>
+
+<div class="col-md-11" style="font-family: 'Open Sans'; font-weight: bold; margin-left: 9%; margin-top: 2%; padding-left: 12%;">
+    <div class="headdata" style="font-size: 18px; float: left; width: 12%">
+        <i class="fa fa-fw fa fa-user-secret"></i> AGENTS
+        <div style="text-align: center; font-size: 30px;">
+            {{dashboardData.agentsCount}}
+        </div>
+    </div>
+    <div class="headdata" style="font-size: 18px; float: left; margin-left: 6%; width: 18%">
+        <i class="fa fa-fw fa fa-users"></i> CUSTOMERS
+        <div style="text-align: center; font-size: 30px;">
+            {{dashboardData.customersCount}}
+        </div>
+    </div>
+    <div class="headdata" style="font-size: 18px; float: left; margin-left: 6%; width: 18%">
+        <i class="fa fa-fw fa fa-star"></i> CATEGORIES
+        <div style="text-align: center; font-size: 30px;">
+            {{dashboardData.categoriesCount}}
+        </div>
+    </div>
+    <div class="headdata" style="font-size: 18px; float: left; border-right: none; margin-left: 6%; width: 18%">
+        <i class="fa fa-fw fa fa-dollar"></i> PRODUCTS
+        <div style="text-align: center; font-size: 30px;">
+            {{dashboardData.productsCount}}
+        </div>
+    </div>
+</div>
+
+
+<div class="circle-panel col-md-11">
+    <h3 style=" margin-bottom: 2%;font-family: 'Open Sans';
+     font-size: 24px; font-weight: bold; color: #5e5e5e; ">Invoices:</h3>
+    <pre style="font-family: 'Open Sans';
+     font-size: 16px; font-weight: bold; color: #5e5e5e;  background-color: white;
+     border: none;">Created               Sent              Confirmed       Ordered               Paid             On Hold              Ready           Canceled</pre>
+    <div class="c100 p20 small">
+        <span>{{icre}}</span>
+        <div class="slice">
+            <div class="bar"></div>
+            <div class="fill"></div>
+        </div>
+    </div>
+    <div class="c100 p40 small">
+        <span>{{sent}}</span>
+        <div class="slice">
+            <div class="bar"></div>
+            <div class="fill"></div>
+        </div>
+    </div>
+    <div class="c100 p60 small">
+        <span>{{conf}}</span>
+        <div class="slice">
+            <div class="bar"></div>
+            <div class="fill"></div>
+        </div>
+    </div>
+    <div class="c100 p80 small">
+        <span>{{orde}}</span>
+        <div class="slice">
+            <div class="bar"></div>
+            <div class="fill"></div>
+        </div>
+    </div>
+    <div class="c100 p100 small">
+        <span>{{paid}}</span>
+        <div class="slice">
+            <div class="bar"></div>
+            <div class="fill"></div>
+        </div>
+    </div>
+    <div class="c100 p100 orange small">
+        <span>{{hold}}</span>
+        <div class="slice">
+            <div class="bar"></div>
+            <div class="fill"></div>
+        </div>
+    </div>
+    <div class="c100 p100 small green">
+        <span>{{ready}}</span>
+        <div class="slice">
+            <div class="bar"></div>
+            <div class="fill"></div>
+        </div>
+    </div>
+    <div class="c100 p100 small red">
+        <span>{{canc}}</span>
+        <div class="slice">
+            <div class="bar"></div>
+            <div class="fill"></div>
+        </div>
+    </div>
+</div>
+
+<div class="chart-panel col-md-11">
+    <!--regions-->
+    <div class="col-md-7" style="float: left"
+         ng-show="showRegions">
+        <div class="dsGraph">
+            <canvas class="chart chart-pie" id="regionSales"></canvas>
+        </div>
+    </div>
+
+    <!--categories-->
+    <div class="col-md-7" style="float: left;"
+         ng-show="showCategories">
+        <div class="dsGraph">
+            <canvas id="categorySales"></canvas>
+        </div>
+    </div>
+
+    <!--agents-->
+    <div class="col-md-7" style="float: left;"
+         ng-show="showAgents">
+        <div class="dsGraph">
+            <canvas id="agentSales"></canvas>
+        </div>
+    </div>
+
+    <div>
+        <div class="rowTable">
+            <div class="col-md-4" style="padding-top:40px">
+                <div class="pull-right" style="margin-bottom: 10px;">
+                    <select style="width: 100%" class="form-control" value="region" ng-model="type" ng-change="checkGo()">
+                        <option value="region" ng-model="region">Regions sales</option>
+                        <option value="category" ng-model="category">Category sales</option>
+                        <option value="agent" ng-model="agent">Agent sales</option>
+                    </select>
+                </div>
+
+                <!--regions table-->
+                <table ng-show="showRegions" id="datatableReg" class="table table-bordered pull-right"
+                       style="font-size: 10px;" cellspacing="0"
+                       width="60%">
+                    <tbody>
+                    <tr>
+                        <td style="background-color: #dddddd"><b>Region</b></td>
+                        <td style="background-color: #dddddd"><b>Sales</b></td>
+                    </tr>
+                    <tr ng-repeat="item in dashboardData.regions">
+                        <td>{{item.label}}</td>
+                        <td>{{item.sales}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <!--categories table-->
+                <table ng-show="showCategories" id="datatableCat" class="table table-bordered"
+                       style="font-size: 10px;" cellspacing="0"
+                       width="60%">
+                    <tbody>
+                    <tr style="text-align: center; background-color: #dddddd">
+                        <th style="text-align: center">Category</th>
+                        <th style="text-align: center">Sales</th>
+                    </tr>
+                    <tr ng-repeat="item in dashboardData.categories">
+                        <td>{{item.label}}</td>
+                        <td>{{item.sales}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <!--agents table-->
+                <table ng-show="showAgents" id="datatableAge" class="table table-bordered"
+                       style="font-size: 10px;" cellspacing="0"
+                       width="60%">
+                    <tbody>
+                    <tr style="text-align: center; background-color: #dddddd">
+                        <th style="text-align: center">Agent</th>
+                        <th style="text-align: center">Sales</th>
+                    </tr>
+                    <tr ng-repeat="item in dashboardData.agents">
+                        <td>{{item.label}}</td>
+                        <td>{{item.sales}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="chart-panel col-md-11">
+    <div class="col-md-12" style="border: 1px solid white; background-color: white;">
+        <div class="dsGraph">
+            <canvas id="annualSales"></canvas>
+        </div>
+    </div>
+</div>
+
+<div class="chart-panel col-md-11">
+    <div class="col-md-5"
+         style="float: left; margin-top: 5%">
+        <div class="dsGraph">
+            <canvas id="top5Sales"></canvas>
+        </div>
+    </div>
+    <div class="col-md-7" style="border-left: 6px solid whitesmoke; margin-top: 2%">
+        <div class="dsGraph">
+            <canvas id="hotsSales"></canvas>
+        </div>
+    </div>
+</div>
+
+<div class="chart-panel col-md-11">
+    <div class="col-md-10" style="border: 1px solid white; background-color: white;">
+        <div class="dsGraph">
+            <canvas id="customersSale"></canvas>
+        </div>
+    </div>
+</div>

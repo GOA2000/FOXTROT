@@ -1,0 +1,9 @@
+{
+  "source": "http://localhost:9000/api/",
+  "regions": [ "Banja Luka", "Bihac", "Doboj", "Mostar", "Sarajevo", "Trebinje", "Tuzla", "Zenica" ],
+  "states": [ "Canceled", "OrderCreated", "OrderConfirmed", "InvoiceCreated", "InvoiceSent", "InvoicePaid", "OnHold", "Ready", "Shipped" ],
+  "signature": "32ogsbWjvS7UttEcDvIpBY+Myin43+5uRhT/nHqYWII=",
+  "apiKey": "Rm94dHJvdC1CaWxsaW5n",
+  "start": "/dashboard",
+  "debugMode": true
+}

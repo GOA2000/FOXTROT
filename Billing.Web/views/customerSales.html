@@ -1,0 +1,41 @@
+<h2 class="title">Sales by Customer</h2>
+
+<div class="inputDate">
+    <label>Sales from: </label> <input type="date" ng-model="requestData.startDate" required>
+    <label>to: </label> <input type="date" ng-model="requestData.endDate" required>
+</div>
+
+<button class="newButton pull-right" ng-click="getSalesByCustomer()">SHOW SALES BY CUSTOMER</button>
+
+
+<div class="pull-right" ng-show="showCustomer" style="width: 100%">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Sales by customer</h3>
+                    <label class="pull-right">TOTAL: {{salesByCustomerData.grandTotal |number:2}} &euro;</label>
+                </div>
+                <table id="datatable" class="table table-striped" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th><i class="fa fa-cog" aria-hidden="true"></i></th>
+                        <th>Name</th>
+                        <th>Turnover</th>
+                        <th>Percentage</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in salesByCustomerData.sales">
+                        <td>{{$index + 1}}</td>
+                        <td>{{item.customerName}}</td>
+                        <td>{{item.customerTurnover | number:2}} &euro;</td>
+                        <td>{{item.customerPercent}} %</td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

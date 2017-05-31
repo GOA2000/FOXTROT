@@ -1,0 +1,45 @@
+<h2 class="title">Agents in Regions</h2>
+
+<div class="inputDate">
+    <label>Sales from: </label> <input type="date" ng-model="requestData.startDate" required>
+    <label>to: </label> <input type="date" ng-model="requestData.endDate" required>
+</div>
+<button class="newButton pull-right" ng-click="getAgentsByRegions()">SHOW AGENTS BY REGIONS
+</button>
+
+<div ng-show="showAgentRegion">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Agents by regions</h3>
+                </div>
+                <table id="datatable" class="table table-striped" cellspacing="0" width="100%">
+                    <thead style="text-align: center">
+                    <tr>
+                        <th>Agent</th>
+                        <th>Turnover</th>
+                        <th ng-repeat="region in regions">{{region}}</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in agentByRegionData.agents">
+                        <td><a href="" ng-click="showAgent(item)">{{item.agentName}}</a></td>
+                        <td>{{item.agentTurnover | number:1}} &euro;</td>
+                        <td ng-repeat="i in [0,1,2,3,4,5,6,7]">{{item.agentSales[i] | number:1}} &euro;</td>
+                    </tr>
+                    <tr>
+                        <td><b> Total:</b></td>
+                        <td>{{agentByRegionData.grandTotal | number:1}} &euro;</td>
+                        <td ng-repeat="region in regions"> {{agentByRegionData.regionSales[$index] | number:1 }} &euro;</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="arGraph" ng-show="show" style="background-color: white;"><canvas id="salesChart"></canvas></div>
+        </div>
+    </div>
+</div>
+
+

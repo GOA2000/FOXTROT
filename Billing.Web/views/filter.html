@@ -1,0 +1,7 @@
+<div id="sortFilter">
+
+    <div style="    display: inline-block;overflow: auto;text-align: right;width: 100%;"><span>Sort by:</span><select ng-model="sort" ng-options="opt.key as opt.value for opt in sorter" ng-change="sortChanged()"
+            style="margin-right: 1%"></select> <span>Filter:</span><span><select
+            ng-model="srchFilter" ng-options="srch.key as srch.value for srch in srchParam"></select></span>
+        <span> <input style="max-width:155px"type="search" ng-model="selector" ng-keyup="searchChanged($event)"></span> </div>
+</div>

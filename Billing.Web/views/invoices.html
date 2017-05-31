@@ -1,0 +1,206 @@
+<div>
+    <button class="newButton" ng-click="new()">NEW INVOICE</button>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Invoices</h3>
+                    <nav-filter filter-on="true" sort-type="+invoiceNo|Invoices asc;-invoiceNo|Invoices dsc;+agent|Agent asc;-agent|Agent dsc;+status|Status asc;-status|Status dsc;+date|Date asc;-date|Date dsc"
+                        srch-type="invoiceNo|Invoice Number;agent|Agent;status|Status" paging-on="true"> </nav-filter>
+                </div>
+
+                <table id="datatable" class="table table-striped" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                <i class="fa fa-cog" aria-hidden="true"></i>
+                            </th>
+                            <th>Invoice No.</th>
+                            <th>Status</th>
+                            <th>VAT</th>
+                            <th>Shipping</th>
+                            <th>Subtotal</th>
+                            <th>VAT-Ammount</th>
+                            <th>Total</th>
+                            <th>Agent</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="invoice in invoices">
+                            <td>{{$index + 1+((currentPage-1)*10)}}</td>
+                            <td>{{invoice.invoiceNo}}</td>
+                            <td>{{invoice.status}}</td>
+                            <td>{{invoice.vat}}%</td>
+                            <td>{{invoice.shipping}} &euro;</td>
+                            <td>{{invoice.subTotal}} &euro;</td>
+                            <td>{{invoice.vatAmount}} &euro;</td>
+                            <td>{{invoice.total}} &euro;</td>
+                            <td>{{invoice.agent}}</td>
+                            <td>
+                                <p data-placement="top" data-toggle="tooltip" title="Edit">
+                                    <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ng-click="edit(invoice)"
+                                        admin-view>
+									<i class="fa fa-pencil" aria-hidden="true"></i>
+								</button>
+                                </p>
+                            </td>
+                            <td>
+                                <p data-placement="top" data-toggle="tooltip" title="Delete">
+                                    <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ng-click="delete(invoice.id)">
+									<i class="fa fa-trash-o" aria-hidden="true"></i>
+								</button>
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <nav-pagination></nav-pagination>
+        </div>
+    </div>
+
+
+    <modal-dialog show='modalShown'>
+        <form role="form">
+            <div class=invoice-data-container>
+                <div class="invoice-param-container">
+                    <div class="invoice-param-block">
+                        <div class="invoice-param">
+                            <label style="display:block">InvoiceNo</label>
+                            <input class="set-max-width" ng-model="invoice.invoiceNo"></input>
+                        </div>
+                        <div class="invoice-param">
+                            <label style="display:block">Agent</label>
+                            <input class="set-max-width" type="text" ng-model="invoiceEdit.selectedAgent" placeholder="Write Agent Name" typeahead="agent as agent.name for agent in getAgents($viewValue)"></input>
+                        </div>
+                        <div class="invoice-param">
+                            <label style="display:block">Customer</label>
+                            <input class="set-max-width" type="text" ng-model="invoiceEdit.selectedCustomer" placeholder="Enter customer" typeahead="customer as customer.name for customer in getCustomers($viewValue)">
+                        </div>
+                        <div class="invoice-param">
+                            <label style="display:block">Status</label>
+                            <input class="set-max-width" value="{{invoice.status}}"></input>
+                        </div>
+                    </div>
+                    <div class="invoice-param-block">
+                        <div class="invoice-param">
+                            <label style="display:block">VAT</label>
+                            <input class="set-max-width" type="number" ng-model="invoice.vat"></input>
+                        </div>
+                        <div class="invoice-param">
+                            <label style="display:block">Date</label>
+                            <input class="set-max-width" type="date" ng-model="invoice.date"></input>
+                        </div>
+                        <div class="invoice-param">
+                            <label style="display:block">Shipper</label>
+                            <input class="set-max-width" type="text" ng-model="invoiceEdit.selectedShipper" placeholder="Enter Shipper" typeahead="shipper as shipper.name for shipper in getShippers($viewValue)"></input>
+                        </div>
+                        <div class="invoice-param">
+                            <label style="display:block">Shipped-On</label>
+                            <input class="set-max-width" type="date" ng-model="invoice.shippedOn"></input>
+                        </div>
+                        <div class="invoice-param-block">
+                            <div class="invoice-param">
+                                <label style="display:block">Shipping Price</label>
+                                <input class="set-max-width" ng-model="invoice.shipping"></input>
+                            </div>
+                            <div style="padding-top:10px;padding-bottom:10px;float:right;padding-right: 6%">
+                                <button ng-click="nextStep(invoice.invoiceNo)">Update Status of Invoice</button>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <div style="padding: 10px;float: right;">
+                        <button type="button" class="btn btn-primary" ng-hide="displayItems" ng-click="save()">Save</button>
+                    </div>
+                </div>
+                <div class="table-container set-max-width" ng-show="displayItems" style="border: solid 1px">
+
+                    <table id="datatable" class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <i class="fa fa-cog" aria-hidden="true"></i>
+                                </th>
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in itemsList">
+                                <td>{{$index + 1+((currentPage-1)*10)}}</td>
+                                <td>{{item.product}}</td>
+                                <td>{{item.quantity}}</td>
+                                <td>{{item.price}}</td>
+                                <td>
+                                    <p data-placement="top" data-toggle="tooltip" title="Edit">
+                                        <button ng-show="invoiceUpdate" class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"
+                                            ng-click="updateItem(item)" admin-view>
+									<i class="fa fa-pencil" aria-hidden="true"></i>
+								</button>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p data-placement="top" data-toggle="tooltip" title="Delete">
+                                        <button ng-show="invoiceUpdate" class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"
+                                            ng-click="deleteItem(item.id)">
+									<i class="fa fa-trash-o" aria-hidden="true"></i>
+								</button>
+                                    </p>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+
+                </div>
+                <table class="table table-striped" ng-show="displayItems && invoiceUpdate">
+
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                    <tr style="text-align: left;">
+                        <td style="text-align:left;" class="remove-padding">
+                            <div class="set-max-width">
+                                <input class="set-max-width" type="text" ng-model="newItem.product" placeholder="Select Product" typeahead="product as product.name for product in getProducts($viewValue)">
+                            </div>
+                        </td>
+                        <td style="text-align:left;" class="remove-padding">
+                            <div class="set-max-width">
+                                <input class="set-max-width remove-side-border" type="text" ng-model="newItem.quantity" placeholder="Quantity">
+                            </div>
+                        </td>
+                        <td style="text-align:left;" class="remove-padding">
+                            <div class="set-max-width">
+                                <input class="set-max-width" type="text" ng-model="newItem.product.price" value={{newItem.product.price}} placeholder="Price">
+
+                            </div>
+                        </td>
+                        <td class="remove-padding" style="vertical-align: middle;"><i class="fa fa-plus-circle fa-2" aria-hidden="true" ng-click="addToInvoice()"></i>
+                        </td>
+                    </tr>
+
+                </table>
+
+            </div>
+            <div style="text-align: left;float: right;font-weight: bolder;padding-right: 2%;">
+
+                <div>Subotal: {{invoice.subTotal | number : 2}} &euro;</div>
+                <div>Shipping: {{invoice.shipping | number : 2}} &euro;</div>
+                <div>VAT: {{invoice.vatAmount | number : 2}} <span style="font:bold">({{invoice.vat}}%)</span></div>
+                <div>Total: {{invoice.total | number : 2}} &euro;</div>
+
+            </div>
+        </form>
+
+
+    </modal-dialog>
+</div>
